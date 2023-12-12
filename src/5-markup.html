@@ -1,0 +1,56 @@
+<!doctype HTML> <!-- Adding doctype -->
+<html>
+  <head> <!-- Adding head tag -->
+    <title>Page With Dynamic Content</title> <!-- Adding a page title -->
+    <!-- Moving references to head tag -->
+    <!-- Using '//' for external references to ensure they use the same protocol as the parent document -->
+    <!-- Marking external scripts as 'defer', to load and execute before DOMContentLoaded is triggered -->
+    <script defer type="text/javascript" src="//www.gw2.com/global.js"></script>
+    <script defer type="text/javascript" src="//www.gw2.com/common.js"></script>
+    <script defer type="text/javascript" src="//www.gw2.com/dynamicContent.js"></script>
+    <!-- Using DOMContentLoaded to execute InvokeUpdate after DOM is loaded and defered scripts have been downloaded and executed, but before images and CSS are loaded -->
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        DynamicContent.InvokeUpdate("dynamicContentContainer");
+      });
+    </script>
+    <!-- Removing tags from CSS, using class names -->
+    <!-- Applying BEM naming conventions to class names --> 
+    <!-- Using css multiple background image declarations -->
+    <!-- Using '//' for external references to ensure they use the same protocol as the parent document -->
+    <!-- note: Any consistent naming convention will work. I selected BEM for the code exercise because it is a known established convention. -->
+    <!-- note: Idealy, we should move styles to a .css file. I have chosen to keep the css styles in the html document to collect all relevant code in a single file for review. --> 
+    <style type="text/css">
+      .dynamic_content {
+        background: url(//www.gw2.com/img/corner_tl.gif) top left,
+                    url(//www.gw2.com/img/corner_tr.gif) top right,
+                    url(//www.gw2.com/img/corner_bl.gif) bottom left,
+                    url(//www.gw2.com/img/corner_br.gif) bottom right;
+        background-repeat: no-repeat;
+      }
+      .dynamic_content__header { /* element header styles */ }
+      .dynamic_content__body { /* element body styles */ }
+      .dynamic_content__grid { /* element grid styles */ }
+    </style>
+  </head>
+  <body>
+    <!-- Adding h1 to improve context -->
+    <h1>Page with dynamic content</h1>
+    <!-- Removed development comments from production code -->
+    <!-- Applying consistant casing -->
+    <!-- Removing unneeded nested tags -->
+    <div class="dynamic_content">
+      <!-- Converting ID to class, allowing element pattern to be potentially reused -->
+      <!-- Converting header div to h2 to improve context -->
+      <h2 class="dynamic_content__header">
+        Awesome Dynamic Content
+      </h2>
+      <!-- Using classes for styling -->
+      <!-- Using ID for javascript targeting -->
+
+      <!-- note: As a personal preference, I use camal case for IDs and underscore formatting (or BEM) for css classes. This is not required, but I prefer the formatting distinction. -->
+
+      <div id="dynamicContentContainer" class="dynamic_content__body dynamic_content__grid"></div>
+    </div>
+  </body> <!-- Closed html and body tag -->
+</html> 

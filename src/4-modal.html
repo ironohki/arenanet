@@ -1,0 +1,144 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", (event) => {
+        modalElement = document.getElementById("modalElement");
+        closeModalElement = document.getElementById("closeModalButton");
+        fullsizeImageElement = document.getElementById("fullsizeImage");
+        thumbnailElements = document.getElementsByClassName("gallery__thumbnail");
+
+        onClickThumbnail = (event) => {
+          fullsizeImageElement.setAttribute("src", event.target.dataset.fullsize);
+          modalElement.classList.add("active");
+        }
+
+        onClickCloseButton = (event) => {
+          modalElement.classList.remove("active");
+        }
+
+        onPressEscapeKey = (event) => {
+          var keyCode = event.keyCode;
+          if(keyCode === 27) {
+            modalElement.classList.remove("active");
+          };
+        }
+
+        for (i = 0; i < thumbnailElements.length; i++){
+          thumbnailElements[i].onclick = onClickThumbnail;
+        }
+
+        closeModalElement.onclick = onClickCloseButton;
+
+        document.addEventListener("keydown", onPressEscapeKey, false);
+      });
+    </script>
+    <style type="text/css">
+      html {
+        font-size: 10px;
+      }
+      .gallery {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+        .gallery__thumbnail {
+          cursor: pointer;
+          margin: 1rem;
+          border: solid 0.4rem rgba(0,220,50,0);
+          border-radius: 0;
+          transition: border 0.5s, border-radius 1s;
+        }
+          .gallery__thumbnail:hover {
+            border: solid 0.4rem rgba(0,220,50,1);
+            border-radius: 4rem;
+          }
+
+      .modal {
+        /* layout */
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+
+        /* layout: flex */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        /* visual */
+        background: rgba(0,0,0,0.8);
+        opacity: 0;
+        transition: opacity 0.5s;
+
+        /* interaction */
+        pointer-events: none;
+      }
+
+        .modal.active {
+          opacity: 1;
+          pointer-events: all;
+        }
+
+        .modal__image {
+          max-height: 80%;
+          aspect-ratio: initial;
+        }
+
+        .modal__close {
+          /* layout */
+          display: block;
+          cursor: pointer;
+          z-index: 2;
+          margin: 0.5rem;
+          padding: 0.2rem;
+          border-radius: 0.5rem;
+
+          /* layout: flex */
+          align-self: flex-end;
+
+
+          /* visual */
+          color: rgb(30,30,30);
+          background-color: rgb(200,200,200);
+          transition: background-color 0.5s;
+
+          /* visual: font */
+          font-family: arial, sans-serif;
+          font-weight: bold;
+          font-size: 2rem;
+          line-height: 2rem;
+          height: 2rem;
+          width: 2rem;
+          text-align: center;
+        }
+          .modal__close:hover {
+            background-color: rgb(255,255,255);
+          }
+
+          /* This is an empty element added for true vertical alignment inside the flexbox. While there are multiple solutions to this, I chose adding the empty element for this exercise to preserve pure flex layout. */
+          .modal__counterbalance {
+            height: 2rem;
+          }
+
+    </style>
+  </head>
+  <body>
+    <h1>Challenge #4 - Modal Window</h1>
+    <div class="gallery">
+      <img class="gallery__thumbnail" src="./img/thm-beastmasters.jpeg" data-fullSize="./img/beastmasters.jpeg" />
+      <img class="gallery__thumbnail" src="./img/thm-overjoyed.jpeg" data-fullSize="./img/overjoyed.jpeg" /> 
+    </div> 
+
+    <!-- note: As a personal preference, I use camal case for IDs and underscore formatting (or BEM) for css classes. This is not required, but I prefer the formatting distinction. -->
+
+    <div id="modalElement" class="modal">
+      <a id="closeModalButton" class="modal__close">X</a>
+      <img id="fullsizeImage" class="modal__image" />
+      <div class="modal__counterbalance"></div>
+    </div>
+  </body>
+</html>
