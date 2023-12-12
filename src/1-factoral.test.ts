@@ -18,9 +18,11 @@ describe('factoral function', () => {
     expect(factoral(-5)).toBe(-1);
   });
   test('returns input of a string to be invalid, indicated as -1', () => {
+    // @ts-ignore: Deliberate invalid type to test error handling
     expect(factoral('Hello')).toBe(-1);
   });
   test('returns input of no value to be invalid, indicated as -1', () => {
+    // @ts-ignore: Deliberate null value to test error handling
     expect(factoral()).toBe(-1);
   });
 });
